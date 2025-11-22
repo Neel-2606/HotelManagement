@@ -8,25 +8,25 @@ import javax.swing.*;
 
 public class CustomerModule extends JFrame implements ActionListener {
 
-    // GUI components
+    
     JTextField txtCheckIn, txtCheckOut, txtType;
     JTextField txtName, txtEmail, txtPhone;
     JTextField txtBookingId;
     JTextArea displayArea;
     JButton btnSearch, btnBook, btnView, btnCancel;
 
-    // Dummy data
+    
     ArrayList<String> roomList = new ArrayList<>();
     ArrayList<String> bookingList = new ArrayList<>();
 
-    // Constructor
+    
     CustomerModule() {
         super("🏨 Hotel Management System - Customer Module 🧳");
         setLayout(null);
         setSize(950, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Changed to DISPOSE to not close entire app
 
-        // Background panel
+        
         JPanel bg = new JPanel();
         bg.setBackground(new Color(230, 250, 255));
         bg.setBounds(0, 0, 950, 700);
@@ -39,7 +39,7 @@ public class CustomerModule extends JFrame implements ActionListener {
         heading.setForeground(new Color(0, 102, 204));
         bg.add(heading);
 
-        // ======= Search Section =======
+        
         JLabel lbl1 = new JLabel("Check-In Date:");
         JLabel lbl2 = new JLabel("Check-Out Date:");
         JLabel lbl3 = new JLabel("Room Type:");
@@ -66,7 +66,7 @@ public class CustomerModule extends JFrame implements ActionListener {
         bg.add(txtCheckIn); bg.add(txtCheckOut); bg.add(txtType);
         bg.add(btnSearch);
 
-        // ======= Display Area =======
+        
         displayArea = new JTextArea();
         displayArea.setBounds(50, 120, 850, 180);
         displayArea.setFont(new Font("Monospaced", Font.BOLD, 16));
@@ -76,7 +76,7 @@ public class CustomerModule extends JFrame implements ActionListener {
         displayArea.setBorder(BorderFactory.createTitledBorder("📋 Room / Booking Details"));
         bg.add(displayArea);
 
-        // ======= Booking Form =======
+        
         JLabel nameLbl = new JLabel("Name:");
         JLabel emailLbl = new JLabel("Email:");
         JLabel phoneLbl = new JLabel("Phone:");
@@ -103,7 +103,7 @@ public class CustomerModule extends JFrame implements ActionListener {
         bg.add(txtName); bg.add(txtEmail); bg.add(txtPhone);
         bg.add(btnBook);
 
-        // ======= View / Cancel =======
+        
         JLabel lbl4 = new JLabel("Booking ID:");
         lbl4.setBounds(50, 460, 100, 25);
         txtBookingId = new JTextField();
@@ -130,7 +130,7 @@ public class CustomerModule extends JFrame implements ActionListener {
         note.setForeground(new Color(102, 102, 102));
         bg.add(note);
 
-        // ======= Fix: Make window visible and center it =======
+        
         setLocationRelativeTo(null);
         setVisible(true);
     }
