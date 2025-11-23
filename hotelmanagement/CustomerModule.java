@@ -1,8 +1,10 @@
-import javax.swing.*;
+package hotelmanagement;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class CustomerModule extends JFrame implements ActionListener {
 
@@ -16,11 +18,9 @@ public class CustomerModule extends JFrame implements ActionListener {
 
     ArrayList<String> roomList = new ArrayList<>();
     ArrayList<String> bookingList = new ArrayList<>();
-
-    
     ArrayList<Integer> bookingIds = new ArrayList<>();
 
-    CustomerModule () {
+    public CustomerModule() {
 
         super("🏨 Hotel Management System - Customer Module 🧳");
         setLayout(null);
@@ -132,6 +132,10 @@ public class CustomerModule extends JFrame implements ActionListener {
 
         bg.add(lbl4); bg.add(txtBookingId);
         bg.add(btnView); bg.add(btnCancel);
+
+        // ✅ FIX: make window visible when called from Dashboard
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     @Override
@@ -172,7 +176,6 @@ public class CustomerModule extends JFrame implements ActionListener {
                 return;
             }
 
-            
             int newId = bookingIds.size() + 1;
             bookingIds.add(newId);
 
@@ -215,7 +218,6 @@ public class CustomerModule extends JFrame implements ActionListener {
             try {
                 int id = Integer.parseInt(txtBookingId.getText());
 
-                
                 if (!bookingIds.contains(id)) {
                     displayArea.setText("❌ Invalid Booking ID!");
                     return;
@@ -233,6 +235,6 @@ public class CustomerModule extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new CustomerModule ().setVisible(true);
+        new CustomerModule();
     }
 }
