@@ -6,31 +6,34 @@ import javax.swing.*;
 
 public class RegistrationForm extends JFrame implements ActionListener {
 
-    JLabel l1, l2;
-    JTextField t1, t2;
-    JButton regBtn, loginBtn;
+    JLabel l1, l2, strengthLabel;
+    JTextField t1;
+    JPasswordField t2;
+    JButton regBtn, loginBtn, clearBtn, resetBtn, togglePassBtn;
     JTextArea area;
 
     static String savedUser = "";
     static String savedPass = "";
 
+    boolean passVisible = false;
+
     public RegistrationForm() {
 
         setTitle("🏨 Hotel Management System - Register 📝");
-        setSize(500, 450);
+        setSize(520, 520);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
 
-        // Background panel
+        // Background
         JPanel bg = new JPanel();
         bg.setBackground(new Color(230, 250, 255));
-        bg.setBounds(0, 0, 500, 450);
+        bg.setBounds(0, 0, 520, 520);
         bg.setLayout(null);
         add(bg);
 
         // Heading
         JLabel heading = new JLabel("✨ Create New Account ✨");
-        heading.setBounds(80, 20, 340, 40);
+        heading.setBounds(90, 20, 350, 40);
         heading.setFont(new Font("Serif", Font.BOLD, 28));
         heading.setForeground(new Color(0, 102, 204));
         bg.add(heading);
@@ -52,65 +55,114 @@ public class RegistrationForm extends JFrame implements ActionListener {
         l2.setBounds(80, 150, 140, 30);
         t2.setBounds(220, 150, 180, 35);
 
-        t1.setFont(new Font("Arial", Font.PLAIN, 12));
-        t2.setFont(new Font("Arial", Font.PLAIN, 12));
+        // Password strength label
+        strengthLabel = new JLabel("Strength: ");
+        strengthLabel.setBounds(220, 190, 180, 20);
+        strengthLabel.setFont(new Font("Arial", Font.BOLD, 12));
+        strengthLabel.setForeground(Color.DARK_GRAY);
+        bg.add(strengthLabel);
 
+        // Password toggle button
+        togglePassBtn = new JButton("👁️");
+        togglePassBtn.setBounds(405, 150, 50, 35);
+        togglePassBtn.addActionListener(this);
+        bg.add(togglePassBtn);
+
+        // Buttons
         regBtn = new JButton("✅ Register");
         loginBtn = new JButton("🔐 Go to Login");
+        clearBtn = new JButton("🧹 Clear Fields");
+        resetBtn = new JButton("⚠️ Reset System");
 
         regBtn.setBackground(new Color(0, 153, 76));
         loginBtn.setBackground(new Color(51, 153, 255));
+        clearBtn.setBackground(new Color(255, 153, 51));
+        resetBtn.setBackground(new Color(204, 0, 0));
+
         regBtn.setForeground(Color.WHITE);
         loginBtn.setForeground(Color.WHITE);
+        clearBtn.setForeground(Color.WHITE);
+        resetBtn.setForeground(Color.WHITE);
+
         regBtn.setFont(new Font("Arial", Font.BOLD, 13));
         loginBtn.setFont(new Font("Arial", Font.BOLD, 13));
+        clearBtn.setFont(new Font("Arial", Font.BOLD, 13));
+        resetBtn.setFont(new Font("Arial", Font.BOLD, 13));
 
         regBtn.setBounds(80, 230, 140, 40);
         loginBtn.setBounds(260, 230, 140, 40);
+        clearBtn.setBounds(80, 280, 140, 40);
+        resetBtn.setBounds(260, 280, 140, 40);
 
+        // Text area
         area = new JTextArea();
-        area.setBounds(50, 290, 400, 120);
+        area.setBounds(50, 340, 420, 150);
         area.setFont(new Font("Monospaced", Font.BOLD, 12));
         area.setBackground(new Color(255, 255, 230));
         area.setForeground(new Color(0, 51, 102));
         area.setEditable(false);
         area.setBorder(BorderFactory.createTitledBorder("📋 Registration Status"));
 
+        // Add components
         bg.add(l1); bg.add(t1);
         bg.add(l2); bg.add(t2);
         bg.add(regBtn); bg.add(loginBtn);
+        bg.add(clearBtn); bg.add(resetBtn);
         bg.add(area);
 
+        // Listeners
         regBtn.addActionListener(this);
         loginBtn.addActionListener(this);
+        clearBtn.addActionListener(this);
+        resetBtn.addActionListener(this);
+
+        // Live password strength check
+        t2.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                updateStrength();
+            }
+        });
 
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    // Password Strength Logic
+    void updateStrength() {
+        String pass = new String(t2.getPassword());
+
+        if (pass.length() < 4) {
+            strengthLabel.setText("Strength: 🔴 Weak");
+            strengthLabel.setForeground(Color.RED);
+        } else if (pass.length() < 8) {
+            strengthLabel.setText("Strength: 🟡 Medium");
+            strengthLabel.setForeground(Color.ORANGE);
+        } else {
+            strengthLabel.setText("Strength: 🟢 Strong");
+            strengthLabel.setForeground(new Color(0, 153, 0));
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == regBtn) {
             String username = t1.getText().trim();
-            String password = t2.getText().trim();
-            
+            String password = new String(t2.getPassword()).trim();
+
             if(username.isEmpty() || password.isEmpty()) {
                 area.append("❌ Please fill all fields!\n");
                 return;
             }
-            
+
             savedUser = username;
             savedPass = password;
 
             area.append("✅ User Registered Successfully!\n");
             area.append("📝 Redirecting to Login...\n");
-            
-            // Redirect to login after 1 second
-            Timer timer = new Timer(1000, new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    new LoginForm();
-                    dispose();
-                }
+
+            Timer timer = new Timer(1000, evt -> {
+                new LoginForm();
+                dispose();
             });
             timer.setRepeats(false);
             timer.start();
@@ -119,6 +171,24 @@ public class RegistrationForm extends JFrame implements ActionListener {
         if(e.getSource() == loginBtn) {
             new LoginForm();
             dispose();
+        }
+
+        if(e.getSource() == clearBtn) {
+            t1.setText("");
+            t2.setText("");
+            strengthLabel.setText("Strength:");
+            area.append("🧹 Cleared all fields!\n");
+        }
+
+        if(e.getSource() == resetBtn) {
+            savedUser = "";
+            savedPass = "";
+            area.append("⚠️ System Reset: All saved accounts cleared!\n");
+        }
+
+        if(e.getSource() == togglePassBtn) {
+            passVisible = !passVisible;
+            t2.setEchoChar(passVisible ? (char)0 : '•');
         }
     }
 }
