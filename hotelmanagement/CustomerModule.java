@@ -17,7 +17,11 @@ public class CustomerModule extends JFrame implements ActionListener {
     ArrayList<String> roomList = new ArrayList<>();
     ArrayList<String> bookingList = new ArrayList<>();
 
+    
+    ArrayList<Integer> bookingIds = new ArrayList<>();
+
     CustomerModule () {
+
         super("🏨 Hotel Management System - Customer Module 🧳");
         setLayout(null);
         setSize(950, 700);
@@ -168,7 +172,11 @@ public class CustomerModule extends JFrame implements ActionListener {
                 return;
             }
 
-            String booking = "BookingID#" + (bookingList.size() + 1)
+            
+            int newId = bookingIds.size() + 1;
+            bookingIds.add(newId);
+
+            String booking = "BookingID#" + newId
                     + " | " + txtName.getText()
                     + " | " + txtEmail.getText()
                     + " | " + type;
@@ -177,9 +185,9 @@ public class CustomerModule extends JFrame implements ActionListener {
             displayArea.setText("✅ Booking Successful!\n" + booking);
 
             try {
-                FileWriter fw = new FileWriter("Booking_" + bookingList.size() + ".txt");
+                FileWriter fw = new FileWriter("Booking_" + newId + ".txt");
                 fw.write("========= BOOKING CONFIRMATION =========\n");
-                fw.write("Booking ID: " + bookingList.size() + "\n");
+                fw.write("Booking ID: " + newId + "\n");
                 fw.write("Name: " + txtName.getText() + "\n");
                 fw.write("Email: " + txtEmail.getText() + "\n");
                 fw.write("Phone: " + txtPhone.getText() + "\n");
@@ -206,12 +214,18 @@ public class CustomerModule extends JFrame implements ActionListener {
         else if (e.getSource() == btnCancel) {
             try {
                 int id = Integer.parseInt(txtBookingId.getText());
-                if (id > 0 && id <= bookingList.size()) {
-                    bookingList.set(id - 1, bookingList.get(id - 1) + " | CANCELLED");
-                    displayArea.setText("🚫 Booking ID " + id + " cancelled successfully!");
-                } else {
+
+                
+                if (!bookingIds.contains(id)) {
                     displayArea.setText("❌ Invalid Booking ID!");
+                    return;
                 }
+
+                int index = bookingIds.indexOf(id);
+
+                bookingList.set(index, bookingList.get(index) + " | CANCELLED");
+                displayArea.setText("🚫 Booking ID " + id + " cancelled successfully!");
+
             } catch (Exception ex) {
                 displayArea.setText("⚠️ Please enter a valid number!");
             }
