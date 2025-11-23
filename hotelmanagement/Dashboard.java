@@ -79,7 +79,7 @@ public class Dashboard extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == roomBtn) {
-        new RoomManagementPanel();      
+        new RoomManagement();      
     }
 
     if (e.getSource() == customerBtn) {

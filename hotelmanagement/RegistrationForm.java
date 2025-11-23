@@ -91,12 +91,29 @@ public class RegistrationForm extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == regBtn) {
-            savedUser = t1.getText();
-            savedPass = t2.getText();
+            String username = t1.getText().trim();
+            String password = t2.getText().trim();
+            
+            if(username.isEmpty() || password.isEmpty()) {
+                area.append("❌ Please fill all fields!\n");
+                return;
+            }
+            
+            savedUser = username;
+            savedPass = password;
 
-            area.append("✅ User Registered!\n");
-            t1.setText("");
-            t2.setText("");
+            area.append("✅ User Registered Successfully!\n");
+            area.append("📝 Redirecting to Login...\n");
+            
+            // Redirect to login after 1 second
+            Timer timer = new Timer(1000, new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    new LoginForm();
+                    dispose();
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
         }
 
         if(e.getSource() == loginBtn) {
