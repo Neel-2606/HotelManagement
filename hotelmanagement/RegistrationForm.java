@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class RegistrationForm extends JFrame implements ActionListener {
 
-    JLabel l1, l2, strengthLabel;
+    JLabel l1, l2;
     JTextField t1;
     JPasswordField t2;
     JButton regBtn, loginBtn, clearBtn, resetBtn, togglePassBtn;
@@ -54,13 +54,6 @@ public class RegistrationForm extends JFrame implements ActionListener {
 
         l2.setBounds(80, 150, 140, 30);
         t2.setBounds(220, 150, 180, 35);
-
-        // Password strength label
-        strengthLabel = new JLabel("Strength: ");
-        strengthLabel.setBounds(220, 190, 180, 20);
-        strengthLabel.setFont(new Font("Arial", Font.BOLD, 12));
-        strengthLabel.setForeground(Color.DARK_GRAY);
-        bg.add(strengthLabel);
 
         // Password toggle button
         togglePassBtn = new JButton("👁️");
@@ -116,32 +109,9 @@ public class RegistrationForm extends JFrame implements ActionListener {
         clearBtn.addActionListener(this);
         resetBtn.addActionListener(this);
 
-        // Live password strength check
-        t2.addKeyListener(new KeyAdapter() {
-            public void keyReleased(KeyEvent e) {
-                updateStrength();
-            }
-        });
-
-        setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    // Password Strength Logic
-    void updateStrength() {
-        String pass = new String(t2.getPassword());
-
-        if (pass.length() < 4) {
-            strengthLabel.setText("Strength: 🔴 Weak");
-            strengthLabel.setForeground(Color.RED);
-        } else if (pass.length() < 8) {
-            strengthLabel.setText("Strength: 🟡 Medium");
-            strengthLabel.setForeground(Color.ORANGE);
-        } else {
-            strengthLabel.setText("Strength: 🟢 Strong");
-            strengthLabel.setForeground(new Color(0, 153, 0));
-        }
-    }
 
     public void actionPerformed(ActionEvent e) {
 
@@ -176,7 +146,6 @@ public class RegistrationForm extends JFrame implements ActionListener {
         if(e.getSource() == clearBtn) {
             t1.setText("");
             t2.setText("");
-            strengthLabel.setText("Strength:");
             area.append("🧹 Cleared all fields!\n");
         }
 
