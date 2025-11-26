@@ -32,7 +32,7 @@ public class AdminBookingSystem extends JFrame implements ActionListener {
         heading.setForeground(new Color(0, 102, 204));
         bg.add(heading);
 
-        // -------- Booking Input Fields --------
+        //  Booking Input Fields
         JLabel lblBookingId = new JLabel("Booking ID:");
         JLabel lblCustomer = new JLabel("Customer Name:");
         JLabel lblCheckIn = new JLabel("Check-In Date:");
@@ -63,7 +63,7 @@ public class AdminBookingSystem extends JFrame implements ActionListener {
         bg.add(txtBookingId); bg.add(txtCustomerName); bg.add(txtCheckIn);
         bg.add(txtCheckOut); bg.add(cmbStatus);
 
-        // -------- Buttons --------
+        // Buttons 
         btnAdd = new JButton("➕ Add Booking");
         btnView = new JButton("👁️ View All");
         btnUpdate = new JButton("✏️ Update Status");
@@ -97,7 +97,7 @@ public class AdminBookingSystem extends JFrame implements ActionListener {
         bg.add(btnAdd); bg.add(btnView); bg.add(btnUpdate);
         bg.add(btnCancel); bg.add(btnAvailability);
 
-        // -------- Display Area --------
+        //  Display Area
         displayArea = new JTextArea();
         displayArea.setBounds(50, 300, 850, 350);
         displayArea.setFont(new Font("Monospaced", Font.BOLD, 14));

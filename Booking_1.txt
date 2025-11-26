@@ -1,0 +1,9 @@
+========= BOOKING CONFIRMATION =========
+Booking ID: 1
+Name: neel
+Email: avc
+Phone: 7839
+Room Type: Presidental
+Check-In: 2025-11-01
+Check-Out: 2025-11-03
+Status: CONFIRMED

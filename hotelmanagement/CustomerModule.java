@@ -55,7 +55,7 @@ public class CustomerModule extends JFrame implements ActionListener {
 
         rbDeluxe = new JRadioButton("Deluxe");
         rbSuite = new JRadioButton("Suite");
-        rbStandard = new JRadioButton("Standard");
+        rbStandard = new JRadioButton("Presidental");
 
         rbDeluxe.setBounds(640, 65, 100, 20);
         rbSuite.setBounds(640, 85, 100, 20);
@@ -133,7 +133,7 @@ public class CustomerModule extends JFrame implements ActionListener {
         bg.add(lbl4); bg.add(txtBookingId);
         bg.add(btnView); bg.add(btnCancel);
 
-        // ✅ FIX: make window visible when called from Dashboard
+        
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -148,7 +148,7 @@ public class CustomerModule extends JFrame implements ActionListener {
 
             roomList.add("R101 - Deluxe Room - ₹3000/night");
             roomList.add("R102 - Suite Room - ₹4500/night");
-            roomList.add("R103 - Standard Room - ₹2000/night");
+            roomList.add("R103 - Presidental Room - ₹8000/night");
 
             for (String r : roomList)
                 displayArea.append("🛏️ " + r + "\n");
@@ -170,7 +170,7 @@ public class CustomerModule extends JFrame implements ActionListener {
             String type = "";
             if (rbDeluxe.isSelected()) type = "Deluxe";
             else if (rbSuite.isSelected()) type = "Suite";
-            else if (rbStandard.isSelected()) type = "Standard";
+            else if (rbStandard.isSelected()) type = "Presidental";
             else {
                 JOptionPane.showMessageDialog(this, "Please select a room type!");
                 return;

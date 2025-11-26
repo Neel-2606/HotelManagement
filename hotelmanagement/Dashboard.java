@@ -40,12 +40,12 @@ public class Dashboard extends JFrame implements ActionListener {
         roomBtn = new JButton("🛏️  Room Management");
         customerBtn = new JButton("👥 Customer Module");
         bookingBtn = new JButton("📅 Booking System");
-        billingBtn = new JButton("💰 Billing & Reports");   // NEW BUTTON
+        billingBtn = new JButton("💰 Billing & Reports");   
 
         roomBtn.setBackground(new Color(255, 153, 51));
         customerBtn.setBackground(new Color(0, 153, 76));
         bookingBtn.setBackground(new Color(51, 153, 255));
-        billingBtn.setBackground(new Color(153, 51, 255)); // New color
+        billingBtn.setBackground(new Color(153, 51, 255)); 
 
         roomBtn.setForeground(Color.WHITE);
         customerBtn.setForeground(Color.WHITE);
@@ -60,7 +60,7 @@ public class Dashboard extends JFrame implements ActionListener {
         roomBtn.setBounds(100, 140, 400, 60);
         customerBtn.setBounds(100, 220, 400, 60);
         bookingBtn.setBounds(100, 300, 400, 60);
-        billingBtn.setBounds(100, 380, 400, 60);   // NEW BUTTON POSITION
+        billingBtn.setBounds(100, 380, 400, 60);  
 
         bg.add(roomBtn);
         bg.add(customerBtn);
@@ -77,7 +77,7 @@ public class Dashboard extends JFrame implements ActionListener {
         roomBtn.addActionListener(this);
         customerBtn.addActionListener(this);
         bookingBtn.addActionListener(this);
-        billingBtn.addActionListener(this); // NEW LISTENER
+        billingBtn.addActionListener(this); 
 
         setLocationRelativeTo(null);
         setVisible(true);

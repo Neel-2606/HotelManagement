@@ -91,19 +91,18 @@ public class LoginForm extends JFrame implements ActionListener {
             String u = t1.getText().trim();
             String p = t2.getText().trim();
 
-            // Check if fields are empty
             if(u.isEmpty() || p.isEmpty()) {
                 area.append("❌ Please enter username and password!\n");
                 return;
             }
 
-            // Check if user has registered first
+           
             if(RegistrationForm.savedUser.isEmpty() || RegistrationForm.savedPass.isEmpty()) {
                 area.append("❌ No user registered! Please register first.\n");
                 return;
             }
 
-            // Check if credentials match
+            
             if(u.equals(RegistrationForm.savedUser) &&
                p.equals(RegistrationForm.savedPass)) {
 
