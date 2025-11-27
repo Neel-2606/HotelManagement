@@ -110,6 +110,7 @@ public class RegistrationForm extends JFrame implements ActionListener {
         resetBtn.addActionListener(this);
 
         setVisible(true);
+        setLocationRelativeTo(null);
     }
 
 
